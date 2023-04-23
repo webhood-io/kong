@@ -1,0 +1,24 @@
+services:
+  kong:
+    container_name: webhood-kong
+    build: .
+    restart: unless-stopped
+    ports:
+      - ${KONG_HTTP_PORT}:8000/tcp
+      - ${KONG_HTTPS_PORT}:8443/tcp
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /usr/local/kong/kong.yml
+      # https://github.com/supabase/cli/issues/14
+      KONG_DNS_ORDER: LAST,A,CNAME
+      KONG_PLUGINS: request-transformer,cors,key-auth,acl,jwt
+      KONG_NGINX_PROXY_PROXY_BUFFER_SIZE: 160k
+      KONG_NGINX_PROXY_PROXY_BUFFERS: 64 160k
+      KONG_VAULTS: env
+      ANON_KEY: ${ANON_KEY}
+      SERVICE_KEY: ${SERVICE_ROLE_KEY}
+      JWT_SECRET: ${JWT_SECRET}
+      # Configuration file for which env vars will be replaced and the final version kopied to KONG_DECLARATIVE_CONFIG
+      WEBHOOD_CONFIG: /tmp/kong.yml
+    volumes:
+      - ./kong.yml.example:/tmp/kong.yml:ro
