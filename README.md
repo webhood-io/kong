@@ -1,6 +1,6 @@
 # Kong declarative with env
 
-![Version](https://img.shields.io/github/v/tag/webhood-io/kong?label=Latest%20version&sort=semver&style=for-the-badge)
+[![Version](https://img.shields.io/github/v/tag/webhood-io/kong?label=Latest%20version&sort=semver&style=for-the-badge)](https://github.com/webhood-io/kong/pkgs/container/kong/versions)
 [![Docker](https://img.shields.io/github/actions/workflow/status/webhood-io/kong/docker-publish.yml?style=for-the-badge)](https://github.com/webhood-io/kong/actions/workflows/docker-publish.yml)
 
 Kong with ability to reference environment variables in declarative configuration file.
